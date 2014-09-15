@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Ronni Elken Lindsgaard">
+		<meta name="description" content="">
+
+		<title>RndPhrase Improved</title>
+
+		<script src="https://raw.githubusercontent.com/RndPhrase/cubehash.js/master/cubehash.js"></script>
+		<script>window.cubehash = window.returnExports</script>
+		<script src="https://raw.githubusercontent.com/RndPhrase/RndPhrase.js/master/rndphrase.js"></script>
+		<script src="js/knockout-3.2.0.js"></script>	
+		<script src="js/jquery-1.11.1.min.js"></script>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</head>
+	<body>
+
+		<div class="container" id="form">
+			<h2>RndPhrase Improved</h2>
+			<h3>WARNING! This code and library is not yet stable. Please go to <a href="https://rndphrase.appspot.com">this</a> site instead.</h3>
+			<div class="form-group">
+				<input type="password" id="seed" placeholder="Seed" class="form-control" autofocus data-bind="textInput: seed">
+			</div>
+			<div class="form-group">
+				<input type="password" id="password" placeholder="Password" class="form-control" data-bind="textInput: password">
+			</div>
+			<div class="form-group">
+				<input type="text" id="uri" placeholder="Uri" class="form-control" data-bind="textInput: uri">
+			</div>
+			<div class="form-group">
+				<input type="text" id="hash" placeholder="Hash" class="form-control input-small" data-bind="value: hash">
+			</div>
+		</div>
+
+		<script src="js/bootstrap.min.js"></script>
+		<script>
+			var RndPhrase = window.returnExports;
+			function viewModel () {
+				var self = this;
+				self.seed = ko.observable('');
+				self.password = ko.observable('');
+				self.uri = ko.observable('');
+				self.hash = ko.pureComputed(function() {
+					if(self.seed() && self.password() && self.uri()) {
+						var r = new RndPhrase({
+							seed: self.seed(),
+							password: self.password(),
+							uri: self.uri()});
+
+						return r.generate();	
+					}
+				}, this)
+			}
+			ko.applyBindings(new viewModel());
+		</script>
+	</body>
+</html>

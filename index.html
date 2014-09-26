@@ -9,9 +9,6 @@
 
 		<title>RndPhrase Improved</title>
 
-		<script src="https://raw.githubusercontent.com/RndPhrase/cubehash.js/master/cubehash.js"></script>
-		<script>window.cubehash = window.returnExports</script>
-		<script src="https://raw.githubusercontent.com/RndPhrase/RndPhrase.js/master/rndphrase.js"></script>
 		<script src="js/knockout-3.2.0.js"></script>	
 		<script src="js/jquery-1.11.1.min.js"></script>
 
@@ -45,25 +42,6 @@
 		</div>
 
 		<script src="js/bootstrap.min.js"></script>
-		<script>
-			var RndPhrase = window.returnExports;
-			function viewModel () {
-				var self = this;
-				self.seed = ko.observable('');
-				self.password = ko.observable('');
-				self.uri = ko.observable('');
-				self.hash = ko.pureComputed(function() {
-					if(self.seed() && self.password() && self.uri()) {
-						var r = new RndPhrase({
-							seed: self.seed(),
-							password: self.password(),
-							uri: self.uri()});
-
-						return r.generate();	
-					}
-				}, this)
-			}
-			ko.applyBindings(new viewModel());
-		</script>
+		<script data-main="js/main" src="js/require.js"></script>
 	</body>
 </html>

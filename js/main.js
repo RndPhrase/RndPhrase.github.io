@@ -32,11 +32,12 @@ require(['rndphrase'], function(RndPhrase) {
 
 				return r.generate();	
 			}
+			return '';
 		}, this);
 	}
 	ko.applyBindings(new viewModel());
 
-	$('#hash').on('focus', function(e) {
-		$(this).select()
+	$('#hash').on('click', function(e) {
+		$(this).select();
 	});
 });

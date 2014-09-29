@@ -24,21 +24,125 @@
 	</head>
 	<body>
 
-		<div class="container" id="form">
+		<div class="container">
 			<h2>RndPhrase Improved</h2>
 			<h3>WARNING! This code and library is not yet stable. Please go to <a href="https://rndphrase.appspot.com">this</a> site instead.</h3>
-			<div class="form-group">
-				<input type="password" id="seed" placeholder="Seed" class="form-control" autofocus data-bind="textInput: seed">
-			</div>
-			<div class="form-group">
-				<input type="password" id="password" placeholder="Password" class="form-control" data-bind="textInput: password">
-			</div>
-			<div class="form-group">
-				<input type="text" id="uri" placeholder="Uri" class="form-control" data-bind="textInput: uri">
-			</div>
-			<div class="form-group">
-				<input type="text" id="hash" placeholder="Hash" class="form-control input-small" data-bind="value: hash">
-			</div>
+			<form class="form-horizontal" role="form">
+			<fieldset>
+				<legend>RndPhrase</legend>
+				<div class="form-group col-md-12">
+					<input type="password" id="seed" placeholder="Seed" class="form-control" autofocus data-bind="textInput: seed">
+				</div>
+				<div class="form-group col-md-12">
+					<input type="password" id="password" placeholder="Password" class="form-control" data-bind="textInput: password">
+				</div>
+				<div class="form-group col-md-12">
+					<input type="text" id="uri" placeholder="Uri" class="form-control" data-bind="textInput: uri">
+				</div>
+				<div class="form-group">
+					<label for="hash" class="col-md-1 control-label">Hash</label>
+					<div class="col-md-1">
+						<input type="text" id="hash" placeholder="Hash" class="form-control input-small" data-bind="value: hash">
+					</div>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>General configuration</legend>
+				<div class="form-group">
+					<label for="size" class="col-md-1 control-label">Size</label>
+					<div class="col-md-1">
+						<input type="text" id="size" class="form-control" data-bind="value: size">
+					</div>
+					<label for="version" class="col-md-1 control-label">Version</label>
+					<div class="col-md-1">
+						<input type="text" id="version" class="form-control" data-bind="value: version">
+					</div>
+				</div>
+			</fieldset>
+			<!-- Begin numeric form control -->
+			<fieldset>
+				<legend>Numeric character configuration</legend>
+				<div class="form-group">
+					<label for="numeric-min" class="col-md-1 control-label">Min</label>
+					<div class="col-md-1">
+						<input type="text" id="numeric-min" class="form-control" data-bind="value: numeric_min">
+					</div>
+
+					<label for="numeric-max" class="col-md-1 control-label">Max</label>
+					<div class="col-md-1">
+						<input type="text" id="numeric-max" class="form-control input-small" data-bind="value: numeric_max">
+					</div>
+
+					<label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
+					<div class="col-md-4">
+						<input type="text" id="numeric-alphabet" class="form-control input-small" data-bind="value: numeric_alphabet">
+					</div>
+				</div>
+			</fieldset>
+			
+			<!-- Begin captial form control -->
+			<fieldset>
+				<legend>Capital character configuration</legend>
+				<div class="form-group">
+					<label for="capital-min" class="col-md-1 control-label">Min</label>
+					<div class="col-md-1">
+						<input type="text" id="capital-min" class="form-control" data-bind="value: capital_min">
+					</div>
+
+					<label for="capital-max" class="col-md-1 control-label">Max</label>
+					<div class="col-md-1">
+						<input type="text" id="capital-max" class="form-control input-small" data-bind="value: capital_max">
+					</div>
+
+					<label for="capital-alphabet" class="col-md-1 control-label">Alphabet</label>
+					<div class="col-md-4">
+						<input type="text" id="capital-alphabet" class="form-control input-small" data-bind="value: capital_alphabet">
+					</div>
+				</div>
+			</fieldset>
+
+			<!-- Begin minuscule form control -->
+			<fieldset>
+				<legend>Minuscule character configuration</legend>
+				<div class="form-group">
+					<label for="minuscule-min" class="col-md-1 control-label">Min</label>
+					<div class="col-md-1">
+						<input type="text" id="minuscule-min" class="form-control" data-bind="value: minuscule_min">
+					</div>
+
+					<label for="minuscule-max" class="col-md-1 control-label">Max</label>
+					<div class="col-md-1">
+						<input type="text" id="minuscule-max" class="form-control input-small" data-bind="value: minuscule_max">
+					</div>
+
+					<label for="minuscule-alphabet" class="col-md-1 control-label">Alphabet</label>
+					<div class="col-md-4">
+						<input type="text" id="minuscule-alphabet" class="form-control input-small" data-bind="value: minuscule_alphabet">
+					</div>
+				</div>
+			</fieldset>
+
+			<!-- Begin special form control -->
+			<fieldset>
+				<legend>Special character configuration</legend>
+				<div class="form-group">
+					<label for="special-min" class="col-md-1 control-label">Min</label>
+					<div class="col-md-1">
+						<input type="text" id="special-min" class="form-control" data-bind="value: special_min">
+					</div>
+
+					<label for="special-max" class="col-md-1 control-label">Max</label>
+					<div class="col-md-1">
+						<input type="text" id="special-max" class="form-control input-small" data-bind="value: special_max">
+					</div>
+
+					<label for="special-alphabet" class="col-md-1 control-label">Alphabet</label>
+					<div class="col-md-4">
+						<input type="text" id="special-alphabet" class="form-control input-small" data-bind="value: special_alphabet">
+					</div>
+				</div>
+			</fieldset>
+			</form>
 		</div>
 
 		<script src="js/bootstrap.min.js"></script>

@@ -10,25 +10,60 @@ require(['rndphrase'], function(RndPhrase) {
 		self.numeric_min = ko.observable(1);
 		self.numeric_max = ko.observable(-1);
 		self.numeric_alphabet = ko.observable('0123456789');
+		self.numeric = ko.pureComputed(function() {
+			return {
+				min: self.numeric_min(),
+				max: parseInt(self.numeric_max()),
+				alphabet: self.numeric_alphabet()
+			};
+		});
 
 		self.capital_min = ko.observable(1);
 		self.capital_max = ko.observable(-1);
 		self.capital_alphabet = ko.observable('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+		self.capital = ko.pureComputed(function() {
+			return {
+				min: self.capital_min(),
+				max: parseInt(self.capital_max()),
+				alphabet: self.capital_alphabet()
+			};
+		});
 
 		self.minuscule_min = ko.observable(1);
 		self.minuscule_max = ko.observable(-1);
 		self.minuscule_alphabet = ko.observable('abcdefghijklmnopqrstuvwxyz');
+		self.minuscule = ko.pureComputed(function() {
+			return {
+				min: self.minuscule_min(),
+				max: parseInt(self.minuscule_max()),
+				alphabet: self.minuscule_alphabet()
+			};
+		});
 
 		self.special_min = ko.observable(1);
 		self.special_max = ko.observable(-1);
 		self.special_alphabet = ko.observable(' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~');
+		self.special = ko.pureComputed(function() {
+			return {
+				min: self.special_min(),
+				max: parseInt(self.special_max()),
+				alphabet: self.special_alphabet()
+			};
+		});
 
 		self.hash = ko.pureComputed(function() {
 			if(self.seed() && self.password() && self.uri()) {
 				var r = new RndPhrase({
 					seed: self.seed(),
 					password: self.password(),
-					uri: self.uri()});
+					uri: self.uri(),
+					numeric: self.numeric(),
+					capital: self.capital(),
+					minuscule: self.minuscule(),
+					special: self.special(),
+					size: self.size(),
+					version: self.version()
+				});
 
 				return r.generate();	
 			}

@@ -8,7 +8,7 @@ require(['rndphrase'], function(RndPhrase) {
 		self.version = ko.observable(1);
 
 		self.numeric_min = ko.observable(1);
-		self.numeric_max = ko.observable(-1);
+		self.numeric_max = ko.observable(0);
 		self.numeric_alphabet = ko.observable('0123456789');
 		self.numeric = ko.pureComputed(function() {
 			return {
@@ -19,7 +19,7 @@ require(['rndphrase'], function(RndPhrase) {
 		});
 
 		self.capital_min = ko.observable(1);
-		self.capital_max = ko.observable(-1);
+		self.capital_max = ko.observable(0);
 		self.capital_alphabet = ko.observable('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 		self.capital = ko.pureComputed(function() {
 			return {
@@ -30,7 +30,7 @@ require(['rndphrase'], function(RndPhrase) {
 		});
 
 		self.minuscule_min = ko.observable(1);
-		self.minuscule_max = ko.observable(-1);
+		self.minuscule_max = ko.observable(0);
 		self.minuscule_alphabet = ko.observable('abcdefghijklmnopqrstuvwxyz');
 		self.minuscule = ko.pureComputed(function() {
 			return {
@@ -41,7 +41,7 @@ require(['rndphrase'], function(RndPhrase) {
 		});
 
 		self.special_min = ko.observable(1);
-		self.special_max = ko.observable(-1);
+		self.special_max = ko.observable(0);
 		self.special_alphabet = ko.observable(' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~');
 		self.special = ko.pureComputed(function() {
 			return {

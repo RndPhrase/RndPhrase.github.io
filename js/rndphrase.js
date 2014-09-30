@@ -24,8 +24,10 @@
 
     function setup_source(source, alphabet) {
         s = source || {};
-        if(!s.min) s.min = 1;
-        if(!s.max) s.max = -1;
+        var min = parseInt(s.min);
+        if(isNaN(min)) s.min = 1;
+        var max = parseInt(s.max);
+        if(isNaN(s.max)) s.max = 0;
         if(!s.alphabet) s.alphabet = alphabet;
         return s;
     }
@@ -58,14 +60,14 @@
 
         passwd = config.password;
 
-        version = config.version
+        version = parseInt(config.version);
 
-        if(!version || version < 0) {
+        if(isNaN(version) || version < 0) {
             version = 1;
         }
 
-        size = config.size;
-        if(size == undefined) {
+        size = parseInt(config.size);
+        if(isNaN(size)) {
             size = 16;
         }
 
@@ -113,7 +115,7 @@
 
             //if max for each source is zero, we remove it
             for(var i = 0; i < sources.length; i++) {
-                if(sources[i].max == 0) {
+                if(!sources[i].min && !sources[i].max){
                     sources.splice(i,1);
                 } else {
                     sources[i].count = 0;
@@ -158,7 +160,7 @@
 
                     tmp += source.alphabet.charAt(c % source.alphabet.length);
                     sources[choice].count++;
-                    if((sources[choice].max > 0) && !(sources[choice].count < sources[choice].max)) {
+                    if(source.max >= source.min && sources[choice].count >= source.max) {
                         sources.splice(choice, 1);
                     }
                 } catch(e) {

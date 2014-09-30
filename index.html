@@ -50,11 +50,11 @@
 				<div class="form-group">
 					<label for="size" class="col-md-1 control-label">Minimal size</label>
 					<div class="col-md-1">
-						<input type="text" id="size" class="form-control" data-bind="textInput: size">
+						<input type="number" min="1" step="1" id="size" class="form-control" data-bind="textInput: size">
 					</div>
 					<label for="version" class="col-md-1 control-label">Version</label>
 					<div class="col-md-1">
-						<input type="text" id="version" class="form-control" data-bind="textInput: version">
+						<input type="number" min="1" step="1" id="version" class="form-control" data-bind="textInput: version">
 					</div>
 				</div>
 			</fieldset>
@@ -64,12 +64,12 @@
 				<div class="form-group">
 					<label for="numeric-min" class="col-md-1 control-label">Min</label>
 					<div class="col-md-1">
-						<input type="text" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
+						<input type="number" min="0" step="1" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
 					</div>
 
 					<label for="numeric-max" class="col-md-1 control-label">Max</label>
 					<div class="col-md-1">
-						<input type="text" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
+						<input type="number" min="0" step="1" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
 					</div>
 
 					<label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
@@ -85,12 +85,12 @@
 				<div class="form-group">
 					<label for="capital-min" class="col-md-1 control-label">Min</label>
 					<div class="col-md-1">
-						<input type="text" id="capital-min" class="form-control" data-bind="textInput: capital_min">
+						<input type="number" min="0" step="1" id="capital-min" class="form-control" data-bind="textInput: capital_min">
 					</div>
 
 					<label for="capital-max" class="col-md-1 control-label">Max</label>
 					<div class="col-md-1">
-						<input type="text" id="capital-max" class="form-control input-small" data-bind="textInput: capital_max">
+						<input type="number" min="0" step="1" id="capital-max" class="form-control input-small" data-bind="textInput: capital_max">
 					</div>
 
 					<label for="capital-alphabet" class="col-md-1 control-label">Alphabet</label>
@@ -106,12 +106,12 @@
 				<div class="form-group">
 					<label for="minuscule-min" class="col-md-1 control-label">Min</label>
 					<div class="col-md-1">
-						<input type="text" id="minuscule-min" class="form-control" data-bind="textInput: minuscule_min">
+						<input type="number" min="0" step="1" id="minuscule-min" class="form-control" data-bind="textInput: minuscule_min">
 					</div>
 
 					<label for="minuscule-max" class="col-md-1 control-label">Max</label>
 					<div class="col-md-1">
-						<input type="text" id="minuscule-max" class="form-control input-small" data-bind="textInput: minuscule_max">
+						<input type="number" min="0" step="1" id="minuscule-max" class="form-control input-small" data-bind="textInput: minuscule_max">
 					</div>
 
 					<label for="minuscule-alphabet" class="col-md-1 control-label">Alphabet</label>
@@ -127,12 +127,12 @@
 				<div class="form-group">
 					<label for="special-min" class="col-md-1 control-label">Min</label>
 					<div class="col-md-1">
-						<input type="text" id="special-min" class="form-control" data-bind="textInput: special_min">
+						<input type="number" min="0" step="1" id="special-min" class="form-control" data-bind="textInput: special_min">
 					</div>
 
 					<label for="special-max" class="col-md-1 control-label">Max</label>
 					<div class="col-md-1">
-						<input type="text" id="special-max" class="form-control input-small" data-bind="textInput: special_max">
+						<input type="number" min="0" step="1" id="special-max" class="form-control input-small" data-bind="textInput: special_max">
 					</div>
 
 					<label for="special-alphabet" class="col-md-1 control-label">Alphabet</label>

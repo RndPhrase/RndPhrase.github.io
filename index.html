@@ -56,6 +56,10 @@
 					<div class="col-md-1">
 						<input type="number" min="1" step="1" id="version" class="form-control" data-bind="textInput: version">
 					</div>
+					<label for="function" class="col-md-2 control-label">Hashing function</label>
+					<div class="col-md-2">
+						<select id="function" class="form-control" data-bind="options: functions, value: selected_function, event: {change: function(){window.location.href = '#' + $root.selected_function();}}"></select>
+					</div>
 				</div>
 			</fieldset>
 			<!-- Begin numeric form control -->

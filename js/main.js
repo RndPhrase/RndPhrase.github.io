@@ -1,4 +1,8 @@
-require(['rndphrase'], function(RndPhrase) {
+var module = 'rndphrase'
+if(window.location.hash = 'original') {
+	module = 'rndphrase-original';
+}
+require([module], function(RndPhrase) {
 	function viewModel () {
 		var self = this;
 		self.seed = ko.observable('');
@@ -6,6 +10,13 @@ require(['rndphrase'], function(RndPhrase) {
 		self.uri = ko.observable('');
 		self.size = ko.observable(16);
 		self.version = ko.observable(1);
+		self.functions = ko.observable(['original','improved']);
+		if(module == 'rndphrase'){
+			self.selected_function = ko.observable('improved');	
+		} else {
+			self.selected_function = ko.observable('original');
+		}
+		
 
 		self.numeric_min = ko.observable(1);
 		self.numeric_max = ko.observable(0);
@@ -65,7 +76,7 @@ require(['rndphrase'], function(RndPhrase) {
 					version: self.version()
 				});
 
-				return r.generate();	
+				return r.generate();
 			}
 			return '';
 		}, this);

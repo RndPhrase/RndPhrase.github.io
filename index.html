@@ -58,7 +58,7 @@
 					</div>
 					<label for="function" class="col-md-2 control-label">Hashing function</label>
 					<div class="col-md-2">
-						<select id="function" class="form-control" data-bind="options: functions, value: selected_function, event: {change: function(){window.location.href = '#' + $root.selected_function();}}"></select>
+						<select id="function" class="form-control" data-bind="options: functions, value: selected_function, event: {change: function(){window.location.href = '#' + $root.selected_function(); window.location.reload()}}"></select>
 					</div>
 				</div>
 			</fieldset>

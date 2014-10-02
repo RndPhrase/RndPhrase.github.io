@@ -1,5 +1,5 @@
 var module = 'rndphrase'
-if(window.location.hash == 'original') {
+if(window.location.hash == '#original') {
 	module = 'rndphrase-original';
 }
 require([module], function(RndPhrase) {

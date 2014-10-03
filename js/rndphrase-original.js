@@ -107,14 +107,10 @@
             doc;
 
         config = config || {};
-        
-        if(config.uri)config.domain = config.uri;
 
-        if (config.seed) {
-            seed = hash(config.seed);
-        } else {
-            throw new Error('RndPhrase: Missing seed in configuration');
-        }
+        if(config.uri) config.domain = config.uri;
+
+        seed = hash(config.seed || '')
 
         if (!config.domain && typeof location !== 'undefined') {
             // Running in browser. Auto detect hostname
@@ -143,11 +139,7 @@
             }
         };
 
-        passwd = config.password;
-
-        if(!passwd) {
-            throw new Error('RndPhrase: Missing password in configuration');
-        }
+        passwd = config.password || '';
 
         _g = self.generator(passwd);
 

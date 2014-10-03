@@ -1,8 +1,8 @@
-var module = 'rndphrase'
-if(window.location.hash == '#original') {
-	module = 'rndphrase-original';
+var module = 'rndphrase-original'
+if(window.location.hash == '#improved') {
+	module = 'rndphrase';
 }
-require([module], function(RndPhrase) {
+require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 	function viewModel () {
 		var self = this;
 		self.seed = ko.observable('');
@@ -63,11 +63,17 @@ require([module], function(RndPhrase) {
 		});
 
 		self.hash = ko.pureComputed(function() {
-			if(self.seed() && self.password() && self.uri()) {
+			if(self.uri()) {
+				var domain = self.uri();
+				if(module != 'rndphrase') {
+					d = new DomainManager();
+					if(!d.is_host(domain)) return '';
+					domain = d.get_host(domain);
+				}
 				var r = new RndPhrase({
 					seed: self.seed(),
 					password: self.password(),
-					uri: self.uri(),
+					uri: domain,
 					numeric: self.numeric(),
 					capital: self.capital(),
 					minuscule: self.minuscule(),

@@ -12,9 +12,17 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 		self.version = ko.observable(1);
 		self.functions = ko.observable(['original','improved']);
 		if(module == 'rndphrase'){
-			self.selected_function = ko.observable('improved');	
+			self.selected_function = ko.observable('improved');
+			self.numeric_default = ko.observable(false);
+			self.capital_default = ko.observable(false);
+			self.minuscule_default = ko.observable(false);
+			self.special_default = ko.observable(false);
 		} else {
 			self.selected_function = ko.observable('original');
+			self.numeric_default = ko.observable(true);
+			self.capital_default = ko.observable(true);
+			self.minuscule_default = ko.observable(true);
+			self.special_default = ko.observable(true);
 		}
 		
 

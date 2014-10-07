@@ -48,22 +48,25 @@
 			<fieldset>
 				<legend>General configuration</legend>
 				<div class="form-group">
-					<label for="size" class="col-md-1 control-label">Minimal size</label>
-					<div class="col-md-1">
-						<input type="number" min="1" step="1" id="size" class="form-control" data-bind="textInput: size">
+					<div data-bind="visible: selected_function() == 'improved'">
+						<label for="size" class="col-md-1 control-label">Minimal size</label>
+						<div class="col-md-1">
+							<input type="number" min="1" step="1" id="size" class="form-control" data-bind="textInput: size">
+						</div>
 					</div>
 					<label for="version" class="col-md-1 control-label">Version</label>
 					<div class="col-md-1">
 						<input type="number" min="1" step="1" id="version" class="form-control" data-bind="textInput: version">
 					</div>
-					<label for="function" class="col-md-2 control-label">Hashing function</label>
+					<label for="function" class="col-md-1 control-label">PRF</label>
 					<div class="col-md-2">
 						<select id="function" class="form-control" data-bind="options: functions, value: selected_function, event: {change: function(){window.location.href = '#' + $root.selected_function(); window.location.reload()}}"></select>
 					</div>
 				</div>
 			</fieldset>
+			
 			<!-- Begin numeric form control -->
-			<fieldset>
+			<fieldset data-bind="visible: !numeric_default()">
 				<legend>Numeric character configuration</legend>
 				<div class="form-group">
 					<label for="numeric-min" class="col-md-1 control-label">Min</label>
@@ -84,7 +87,7 @@
 			</fieldset>
 			
 			<!-- Begin captial form control -->
-			<fieldset>
+			<fieldset data-bind="visible: !capital_default()">
 				<legend>Capital character configuration</legend>
 				<div class="form-group">
 					<label for="capital-min" class="col-md-1 control-label">Min</label>
@@ -105,7 +108,7 @@
 			</fieldset>
 
 			<!-- Begin minuscule form control -->
-			<fieldset>
+			<fieldset data-bind="visible: !minuscule_default()">
 				<legend>Minuscule character configuration</legend>
 				<div class="form-group">
 					<label for="minuscule-min" class="col-md-1 control-label">Min</label>
@@ -126,7 +129,7 @@
 			</fieldset>
 
 			<!-- Begin special form control -->
-			<fieldset>
+			<fieldset data-bind="visible: !special_default()">
 				<legend>Special character configuration</legend>
 				<div class="form-group">
 					<label for="special-min" class="col-md-1 control-label">Min</label>

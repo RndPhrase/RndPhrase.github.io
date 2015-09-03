@@ -24,7 +24,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			self.minuscule_default = ko.observable(true);
 			self.special_default = ko.observable(true);
 		}
-		
+
 
 		self.numeric_min = ko.observable(1);
 		self.numeric_max = ko.observable(0);

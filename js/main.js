@@ -3,7 +3,7 @@ if(window.location.hash == '#improved') {
 	module = 'rndphrase';
 }
 require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
-	function viewModel () {
+	function ViewModel () {
 		var self = this;
 		self.seed = ko.observable('');
 		self.password = ko.observable('');
@@ -95,9 +95,15 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			return '';
 		}, this);
 	}
-	ko.applyBindings(new viewModel());
+	var viewModel = new ViewModel()
+	ko.applyBindings(viewModel);
 
 	$('#hash').on('click', function(e) {
 		$(this).select();
+	});
+
+	$(window).on('blur', function(e) {
+		viewModel.password('');
+		$('#password').focus();
 	});
 });

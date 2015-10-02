@@ -46,48 +46,55 @@
 				</div>
 			</fieldset>
 			<fieldset>
-				<legend>General configuration</legend>
+				<legend>
+					General configuration
+					<label for="use-legacy-mode" class="legend-label">
+						<input type="checkbox"
+							   id="use-legacy-mode"
+							   data-bind="checked: use_legacy_mode" />
+							Legacy mode
+						</label>
+				</legend>
 				<div class="form-group">
-					<div data-bind="visible: selected_function() == 'improved'">
+					<label for="version" class="col-md-1 control-label">Version</label>
+					<div class="col-md-1">
+						<input type="number" min="1" step="1" id="version" class="form-control" data-bind="textInput: version">
+					</div>
+
+					<div data-bind="visible: !use_legacy_mode()">
 						<label for="size" class="col-md-1 control-label">Minimal size</label>
 						<div class="col-md-1">
 							<input type="number" min="1" step="1" id="size" class="form-control" data-bind="textInput: size">
 						</div>
 					</div>
-					<label for="version" class="col-md-1 control-label">Version</label>
-					<div class="col-md-1">
-						<input type="number" min="1" step="1" id="version" class="form-control" data-bind="textInput: version">
-					</div>
-					<label for="function" class="col-md-1 control-label">PRF</label>
-					<div class="col-md-2">
-						<select id="function" class="form-control" data-bind="options: functions, value: selected_function, event: {change: function(){window.location.href = '#' + $root.selected_function(); window.location.reload()}}"></select>
-					</div>
 				</div>
 			</fieldset>
 
 			<!-- Begin numeric form control -->
-			<fieldset data-bind="visible: !numeric_default()">
+			<fieldset data-bind="visible: !use_legacy_mode()">
 				<legend>Numeric character configuration</legend>
 				<div class="form-group">
-					<label for="numeric-min" class="col-md-1 control-label">Min</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
-					</div>
+					<div data-bind="visible: !numeric_default()">
+						<label for="numeric-min" class="col-md-1 control-label">Min</label>
+						<div class="col-md-1">
+							<input type="number" min="0" step="1" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
+						</div>
 
-					<label for="numeric-max" class="col-md-1 control-label">Max</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
-					</div>
+						<label for="numeric-max" class="col-md-1 control-label">Max</label>
+						<div class="col-md-1">
+							<input type="number" min="0" step="1" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
+						</div>
 
-					<label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
-					<div class="col-md-4">
-						<input type="text" id="numeric-alphabet" class="form-control input-small" data-bind="textInput: numeric_alphabet">
+						<label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
+						<div class="col-md-4">
+							<input type="text" id="numeric-alphabet" class="form-control input-small" data-bind="textInput: numeric_alphabet">
+						</div>
 					</div>
 				</div>
 			</fieldset>
 
 			<!-- Begin captial form control -->
-			<fieldset data-bind="visible: !capital_default()">
+			<fieldset data-bind="visible: !use_legacy_mode()">
 				<legend>Capital character configuration</legend>
 				<div class="form-group">
 					<label for="capital-min" class="col-md-1 control-label">Min</label>
@@ -108,7 +115,7 @@
 			</fieldset>
 
 			<!-- Begin minuscule form control -->
-			<fieldset data-bind="visible: !minuscule_default()">
+			<fieldset data-bind="visible: !use_legacy_mode() && !minuscule_default()">
 				<legend>Minuscule character configuration</legend>
 				<div class="form-group">
 					<label for="minuscule-min" class="col-md-1 control-label">Min</label>
@@ -129,7 +136,7 @@
 			</fieldset>
 
 			<!-- Begin special form control -->
-			<fieldset data-bind="visible: !special_default()">
+			<fieldset data-bind="visible: !use_legacy_mode() && !special_default()">
 				<legend>Special character configuration</legend>
 				<div class="form-group">
 					<label for="special-min" class="col-md-1 control-label">Min</label>

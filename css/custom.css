@@ -5,3 +5,7 @@ body {
 footer p {
     text-align: center;
 }
+
+.legend-label {
+    font-size: medium;
+}

@@ -10,22 +10,9 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 		self.uri = ko.observable('');
 		self.size = ko.observable(16);
 		self.version = ko.observable(1);
-		self.functions = ko.observable(['original','improved']);
-		if(module == 'rndphrase'){
-			self.selected_function = ko.observable('improved');
-			self.numeric_default = ko.observable(false);
-			self.capital_default = ko.observable(false);
-			self.minuscule_default = ko.observable(false);
-			self.special_default = ko.observable(false);
-		} else {
-			self.selected_function = ko.observable('original');
-			self.numeric_default = ko.observable(true);
-			self.capital_default = ko.observable(true);
-			self.minuscule_default = ko.observable(true);
-			self.special_default = ko.observable(true);
-		}
+		self.use_legacy_mode = ko.observable(true)
 
-
+		self.numeric_default = ko.observable(false);
 		self.numeric_min = ko.observable(1);
 		self.numeric_max = ko.observable(0);
 		self.numeric_alphabet = ko.observable('0123456789');
@@ -37,6 +24,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			};
 		});
 
+		self.capital_default = ko.observable(false);
 		self.capital_min = ko.observable(1);
 		self.capital_max = ko.observable(0);
 		self.capital_alphabet = ko.observable('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
@@ -48,6 +36,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			};
 		});
 
+		self.minuscule_default = ko.observable(false);
 		self.minuscule_min = ko.observable(1);
 		self.minuscule_max = ko.observable(0);
 		self.minuscule_alphabet = ko.observable('abcdefghijklmnopqrstuvwxyz');
@@ -59,6 +48,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			};
 		});
 
+		self.special_default = ko.observable(false);
 		self.special_min = ko.observable(1);
 		self.special_max = ko.observable(0);
 		self.special_alphabet = ko.observable(' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~');
@@ -74,6 +64,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			if(self.uri()) {
 				var domain = self.uri();
 				if(module != 'rndphrase') {
+					// We're in legacy land
 					d = new DomainManager();
 					if(!d.is_host(domain)) return '';
 					domain = d.get_host(domain);

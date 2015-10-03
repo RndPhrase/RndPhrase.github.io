@@ -12,7 +12,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 		self.version = ko.observable(1);
 		self.use_legacy_mode = ko.observable(true)
 
-		self.numeric_default = ko.observable(false);
+		self.use_numeric_defaults = ko.observable(true);
 		self.numeric_min = ko.observable(1);
 		self.numeric_max = ko.observable(0);
 		self.numeric_alphabet = ko.observable('0123456789');
@@ -24,7 +24,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			};
 		});
 
-		self.capital_default = ko.observable(false);
+		self.use_capital_defaults = ko.observable(true);
 		self.capital_min = ko.observable(1);
 		self.capital_max = ko.observable(0);
 		self.capital_alphabet = ko.observable('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
@@ -36,7 +36,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			};
 		});
 
-		self.minuscule_default = ko.observable(false);
+		self.use_minuscule_defaults = ko.observable(true);
 		self.minuscule_min = ko.observable(1);
 		self.minuscule_max = ko.observable(0);
 		self.minuscule_alphabet = ko.observable('abcdefghijklmnopqrstuvwxyz');
@@ -48,7 +48,7 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
 			};
 		});
 
-		self.special_default = ko.observable(false);
+		self.use_special_defaults = ko.observable(true);
 		self.special_min = ko.observable(1);
 		self.special_max = ko.observable(0);
 		self.special_alphabet = ko.observable(' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~');

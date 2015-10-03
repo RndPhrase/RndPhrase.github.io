@@ -72,31 +72,45 @@
 
 			<!-- Begin numeric form control -->
 			<fieldset data-bind="visible: !use_legacy_mode()">
-				<legend>Numeric character configuration</legend>
-				<div class="form-group">
-					<div data-bind="visible: !numeric_default()">
-						<label for="numeric-min" class="col-md-1 control-label">Min</label>
-						<div class="col-md-1">
-							<input type="number" min="0" step="1" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
-						</div>
+				<legend>
+					Numeric character configuration
+					<label for="use-numeric-defaults" class="legend-label">
+						<input type="checkbox"
+							   id="use-numeric-defaults"
+							   data-bind="checked: use_numeric_defaults" />
+						Use defaults
+					</label>
+				</legend>
+				<div class="form-group" data-bind="visible: !use_numeric_defaults()">
+					<label for="numeric-min" class="col-md-1 control-label">Min</label>
+					<div class="col-md-1">
+						<input type="number" min="0" step="1" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
+					</div>
 
-						<label for="numeric-max" class="col-md-1 control-label">Max</label>
-						<div class="col-md-1">
-							<input type="number" min="0" step="1" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
-						</div>
+					<label for="numeric-max" class="col-md-1 control-label">Max</label>
+					<div class="col-md-1">
+						<input type="number" min="0" step="1" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
+					</div>
 
-						<label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
-						<div class="col-md-4">
-							<input type="text" id="numeric-alphabet" class="form-control input-small" data-bind="textInput: numeric_alphabet">
-						</div>
+					<label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
+					<div class="col-md-4">
+						<input type="text" id="numeric-alphabet" class="form-control input-small" data-bind="textInput: numeric_alphabet">
 					</div>
 				</div>
 			</fieldset>
 
 			<!-- Begin captial form control -->
 			<fieldset data-bind="visible: !use_legacy_mode()">
-				<legend>Capital character configuration</legend>
-				<div class="form-group">
+				<legend>
+					Capital character configuration
+					<label for="use-capital-defaults" class="legend-label">
+						<input type="checkbox"
+							   id="use-capital-defaults"
+							   data-bind="checked: use_capital_defaults" />
+						Use defaults
+					</label>
+				</legend>
+				<div class="form-group" data-bind="visible: !use_capital_defaults()">
 					<label for="capital-min" class="col-md-1 control-label">Min</label>
 					<div class="col-md-1">
 						<input type="number" min="0" step="1" id="capital-min" class="form-control" data-bind="textInput: capital_min">
@@ -115,9 +129,17 @@
 			</fieldset>
 
 			<!-- Begin minuscule form control -->
-			<fieldset data-bind="visible: !use_legacy_mode() && !minuscule_default()">
-				<legend>Minuscule character configuration</legend>
-				<div class="form-group">
+			<fieldset data-bind="visible: !use_legacy_mode()">
+				<legend>
+					Minuscule character configuration
+					<label for="use-minuscule-defaults" class="legend-label">
+						<input type="checkbox"
+							   id="use-minuscule-defaults"
+							   data-bind="checked: use_minuscule_defaults" />
+						Use defaults
+					</legend>
+				<div class="form-group"
+					 data-bind="visible: !use_minuscule_defaults()">
 					<label for="minuscule-min" class="col-md-1 control-label">Min</label>
 					<div class="col-md-1">
 						<input type="number" min="0" step="1" id="minuscule-min" class="form-control" data-bind="textInput: minuscule_min">
@@ -136,9 +158,17 @@
 			</fieldset>
 
 			<!-- Begin special form control -->
-			<fieldset data-bind="visible: !use_legacy_mode() && !special_default()">
-				<legend>Special character configuration</legend>
-				<div class="form-group">
+			<fieldset data-bind="visible: !use_legacy_mode()">
+				<legend>
+					Special character configuration
+					<label for="use-special-defaults" class="legend-label">
+						<input type="checkbox"
+							   id="use-special-defaults"
+							   data-bind="checked: use_special_defaults" />
+						Use defaults
+					</legend>
+				<div class="form-group"
+				     data-bind="visible: !use_special_defaults()">
 					<label for="special-min" class="col-md-1 control-label">Min</label>
 					<div class="col-md-1">
 						<input type="number" min="0" step="1" id="special-min" class="form-control" data-bind="textInput: special_min">

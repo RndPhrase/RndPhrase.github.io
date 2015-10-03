@@ -1,8 +1,6 @@
-var module = 'rndphrase-original'
-if(window.location.hash == '#improved') {
-    module = 'rndphrase';
-}
-require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
+require(
+	['rndphrase-original', 'rndphrase', 'domainmanager'],
+	function(Legacy, Improved, DomainManager) {
     function ViewModel () {
         var self = this;
         self.seed = ko.observable('');
@@ -63,13 +61,14 @@ require([module, 'domainmanager'], function(RndPhrase, DomainManager) {
         self.hash = ko.pureComputed(function() {
             if(self.uri()) {
                 var domain = self.uri();
-                if(module != 'rndphrase') {
-                    // We're in legacy land
+                var psFunc = Improved;
+                if(self.use_legacy_mode()) {
+                    psFunc = Legacy;
                     d = new DomainManager();
                     if(!d.is_host(domain)) return '';
                     domain = d.get_host(domain);
                 }
-                var r = new RndPhrase({
+                var r = new psFunc({
                     seed: self.seed(),
                     password: self.password(),
                     uri: domain,

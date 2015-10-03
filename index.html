@@ -1,196 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="Ronni Elken Lindsgaard">
-		<meta name="description" content="RndPhrase provides the same functionality as a password manager. It is more secure than an on-line password manager as you need not trust a service provider. It is more portable than an off-line password manager as you don't need to store a database file.">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Ronni Elken Lindsgaard">
+        <meta name="description" content="RndPhrase provides the same functionality as a password manager. It is more secure than an on-line password manager as you need not trust a service provider. It is more portable than an off-line password manager as you don't need to store a database file.">
+        <title>RndPhrase Improved</title>
 
-		<title>RndPhrase Improved</title>
+        <script src="js/knockout-3.2.0.js"></script>
+        <script src="js/jquery-1.11.1.min.js"></script>
 
-		<script src="js/knockout-3.2.0.js"></script>
-		<script src="js/jquery-1.11.1.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/custom.css" rel="stylesheet">
 
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/custom.css" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
 
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	    <!--[if lt IE 9]>
-	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	    <![endif]-->
-	</head>
-	<body>
+        <div class="container">
+            <h2>RndPhrase Improved <small data-bind>v0.9.5</small></h2>
+            <form class="form-horizontal" role="form">
+            <fieldset>
+                <legend>RndPhrase</legend>
+                <div class="form-group col-md-12">
+                    <input type="password" id="seed" placeholder="Seed" class="form-control" autofocus data-bind="textInput: seed">
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="password" id="password" placeholder="Password" class="form-control" data-bind="textInput: password">
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="text" id="uri" placeholder="Uri" class="form-control" data-bind="textInput: uri">
+                </div>
+                <div class="form-group">
+                    <label for="hash" class="col-md-1 control-label">Hash</label>
+                    <div class="col-md-1">
+                        <input type="text" id="hash" class="form-control input-small" data-bind="textInput: hash">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    General configuration
+                    <label for="use-legacy-mode" class="legend-label">
+                        <input type="checkbox"
+                               id="use-legacy-mode"
+                               data-bind="checked: use_legacy_mode" />
+                        Use Legacy mode
+                    </label>
+                </legend>
+                <div class="form-group">
+                    <label for="version" class="col-md-1 control-label">Version</label>
+                    <div class="col-md-1">
+                        <input type="number" min="1" step="1" id="version" class="form-control" data-bind="textInput: version">
+                    </div>
 
-		<div class="container">
-			<h2>RndPhrase Improved <small data-bind>v0.9.5</small></h2>
-			<form class="form-horizontal" role="form">
-			<fieldset>
-				<legend>RndPhrase</legend>
-				<div class="form-group col-md-12">
-					<input type="password" id="seed" placeholder="Seed" class="form-control" autofocus data-bind="textInput: seed">
-				</div>
-				<div class="form-group col-md-12">
-					<input type="password" id="password" placeholder="Password" class="form-control" data-bind="textInput: password">
-				</div>
-				<div class="form-group col-md-12">
-					<input type="text" id="uri" placeholder="Uri" class="form-control" data-bind="textInput: uri">
-				</div>
-				<div class="form-group">
-					<label for="hash" class="col-md-1 control-label">Hash</label>
-					<div class="col-md-1">
-						<input type="text" id="hash" class="form-control input-small" data-bind="textInput: hash">
-					</div>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>
-					General configuration
-					<label for="use-legacy-mode" class="legend-label">
-						<input type="checkbox"
-							   id="use-legacy-mode"
-							   data-bind="checked: use_legacy_mode" />
-						Use Legacy mode
-					</label>
-				</legend>
-				<div class="form-group">
-					<label for="version" class="col-md-1 control-label">Version</label>
-					<div class="col-md-1">
-						<input type="number" min="1" step="1" id="version" class="form-control" data-bind="textInput: version">
-					</div>
+                    <div data-bind="visible: !use_legacy_mode()">
+                        <label for="size" class="col-md-1 control-label">Minimal size</label>
+                        <div class="col-md-1">
+                            <input type="number" min="1" step="1" id="size" class="form-control" data-bind="textInput: size">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
 
-					<div data-bind="visible: !use_legacy_mode()">
-						<label for="size" class="col-md-1 control-label">Minimal size</label>
-						<div class="col-md-1">
-							<input type="number" min="1" step="1" id="size" class="form-control" data-bind="textInput: size">
-						</div>
-					</div>
-				</div>
-			</fieldset>
+            <!-- Begin numeric form control -->
+            <fieldset data-bind="visible: !use_legacy_mode()">
+                <legend>
+                    Numeric character configuration
+                    <label for="use-numeric-defaults" class="legend-label">
+                        <input type="checkbox"
+                               id="use-numeric-defaults"
+                               data-bind="checked: use_numeric_defaults" />
+                        Use defaults
+                    </label>
+                </legend>
+                <div class="form-group" data-bind="visible: !use_numeric_defaults()">
+                    <label for="numeric-min" class="col-md-1 control-label">Min</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
+                    </div>
 
-			<!-- Begin numeric form control -->
-			<fieldset data-bind="visible: !use_legacy_mode()">
-				<legend>
-					Numeric character configuration
-					<label for="use-numeric-defaults" class="legend-label">
-						<input type="checkbox"
-							   id="use-numeric-defaults"
-							   data-bind="checked: use_numeric_defaults" />
-						Use defaults
-					</label>
-				</legend>
-				<div class="form-group" data-bind="visible: !use_numeric_defaults()">
-					<label for="numeric-min" class="col-md-1 control-label">Min</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="numeric-min" class="form-control" data-bind="textInput: numeric_min">
-					</div>
+                    <label for="numeric-max" class="col-md-1 control-label">Max</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
+                    </div>
+                    <label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
+                    <div class="col-md-4">
+                        <input type="text" id="numeric-alphabet" class="form-control input-small" data-bind="textInput: numeric_alphabet">
+                    </div>
+                </div>
+            </fieldset>
 
-					<label for="numeric-max" class="col-md-1 control-label">Max</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="numeric-max" class="form-control input-small" data-bind="textInput: numeric_max">
-					</div>
+            <!-- Begin captial form control -->
+            <fieldset data-bind="visible: !use_legacy_mode()">
+                <legend>
+                    Capital character configuration
+                    <label for="use-capital-defaults" class="legend-label">
+                        <input type="checkbox"
+                               id="use-capital-defaults"
+                               data-bind="checked: use_capital_defaults" />
+                        Use defaults
+                    </label>
+                </legend>
+                <div class="form-group" data-bind="visible: !use_capital_defaults()">
+                    <label for="capital-min" class="col-md-1 control-label">Min</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="capital-min" class="form-control" data-bind="textInput: capital_min">
+                    </div>
 
-					<label for="numeric-alphabet" class="col-md-1 control-label">Alphabet</label>
-					<div class="col-md-4">
-						<input type="text" id="numeric-alphabet" class="form-control input-small" data-bind="textInput: numeric_alphabet">
-					</div>
-				</div>
-			</fieldset>
+                    <label for="capital-max" class="col-md-1 control-label">Max</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="capital-max" class="form-control input-small" data-bind="textInput: capital_max">
+                    </div>
 
-			<!-- Begin captial form control -->
-			<fieldset data-bind="visible: !use_legacy_mode()">
-				<legend>
-					Capital character configuration
-					<label for="use-capital-defaults" class="legend-label">
-						<input type="checkbox"
-							   id="use-capital-defaults"
-							   data-bind="checked: use_capital_defaults" />
-						Use defaults
-					</label>
-				</legend>
-				<div class="form-group" data-bind="visible: !use_capital_defaults()">
-					<label for="capital-min" class="col-md-1 control-label">Min</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="capital-min" class="form-control" data-bind="textInput: capital_min">
-					</div>
+                    <label for="capital-alphabet" class="col-md-1 control-label">Alphabet</label>
+                    <div class="col-md-4">
+                        <input type="text" id="capital-alphabet" class="form-control input-small" data-bind="textInput: capital_alphabet">
+                    </div>
+                </div>
+            </fieldset>
 
-					<label for="capital-max" class="col-md-1 control-label">Max</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="capital-max" class="form-control input-small" data-bind="textInput: capital_max">
-					</div>
+            <!-- Begin minuscule form control -->
+            <fieldset data-bind="visible: !use_legacy_mode()">
+                <legend>
+                    Minuscule character configuration
+                    <label for="use-minuscule-defaults" class="legend-label">
+                        <input type="checkbox"
+                               id="use-minuscule-defaults"
+                               data-bind="checked: use_minuscule_defaults" />
+                        Use defaults
+                    </legend>
+                <div class="form-group"
+                     data-bind="visible: !use_minuscule_defaults()">
+                    <label for="minuscule-min" class="col-md-1 control-label">Min</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="minuscule-min" class="form-control" data-bind="textInput: minuscule_min">
+                    </div>
 
-					<label for="capital-alphabet" class="col-md-1 control-label">Alphabet</label>
-					<div class="col-md-4">
-						<input type="text" id="capital-alphabet" class="form-control input-small" data-bind="textInput: capital_alphabet">
-					</div>
-				</div>
-			</fieldset>
+                    <label for="minuscule-max" class="col-md-1 control-label">Max</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="minuscule-max" class="form-control input-small" data-bind="textInput: minuscule_max">
+                    </div>
 
-			<!-- Begin minuscule form control -->
-			<fieldset data-bind="visible: !use_legacy_mode()">
-				<legend>
-					Minuscule character configuration
-					<label for="use-minuscule-defaults" class="legend-label">
-						<input type="checkbox"
-							   id="use-minuscule-defaults"
-							   data-bind="checked: use_minuscule_defaults" />
-						Use defaults
-					</legend>
-				<div class="form-group"
-					 data-bind="visible: !use_minuscule_defaults()">
-					<label for="minuscule-min" class="col-md-1 control-label">Min</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="minuscule-min" class="form-control" data-bind="textInput: minuscule_min">
-					</div>
+                    <label for="minuscule-alphabet" class="col-md-1 control-label">Alphabet</label>
+                    <div class="col-md-4">
+                        <input type="text" id="minuscule-alphabet" class="form-control input-small" data-bind="textInput: minuscule_alphabet">
+                    </div>
+                </div>
+            </fieldset>
 
-					<label for="minuscule-max" class="col-md-1 control-label">Max</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="minuscule-max" class="form-control input-small" data-bind="textInput: minuscule_max">
-					</div>
+            <!-- Begin special form control -->
+            <fieldset data-bind="visible: !use_legacy_mode()">
+                <legend>
+                    Special character configuration
+                    <label for="use-special-defaults" class="legend-label">
+                        <input type="checkbox"
+                               id="use-special-defaults"
+                               data-bind="checked: use_special_defaults" />
+                        Use defaults
+                    </legend>
+                <div class="form-group"
+                     data-bind="visible: !use_special_defaults()">
+                    <label for="special-min" class="col-md-1 control-label">Min</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="special-min" class="form-control" data-bind="textInput: special_min">
+                    </div>
 
-					<label for="minuscule-alphabet" class="col-md-1 control-label">Alphabet</label>
-					<div class="col-md-4">
-						<input type="text" id="minuscule-alphabet" class="form-control input-small" data-bind="textInput: minuscule_alphabet">
-					</div>
-				</div>
-			</fieldset>
+                    <label for="special-max" class="col-md-1 control-label">Max</label>
+                    <div class="col-md-1">
+                        <input type="number" min="0" step="1" id="special-max" class="form-control input-small" data-bind="textInput: special_max">
+                    </div>
 
-			<!-- Begin special form control -->
-			<fieldset data-bind="visible: !use_legacy_mode()">
-				<legend>
-					Special character configuration
-					<label for="use-special-defaults" class="legend-label">
-						<input type="checkbox"
-							   id="use-special-defaults"
-							   data-bind="checked: use_special_defaults" />
-						Use defaults
-					</legend>
-				<div class="form-group"
-				     data-bind="visible: !use_special_defaults()">
-					<label for="special-min" class="col-md-1 control-label">Min</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="special-min" class="form-control" data-bind="textInput: special_min">
-					</div>
-
-					<label for="special-max" class="col-md-1 control-label">Max</label>
-					<div class="col-md-1">
-						<input type="number" min="0" step="1" id="special-max" class="form-control input-small" data-bind="textInput: special_max">
-					</div>
-
-					<label for="special-alphabet" class="col-md-1 control-label">Alphabet</label>
-					<div class="col-md-4">
-						<input type="text" id="special-alphabet" class="form-control input-small" data-bind="textInput: special_alphabet">
-					</div>
-				</div>
-			</fieldset>
-			</form>
-		</div>
-		<footer>
-			<p>RndPhrase is released under the MIT license - &copy; Ronni Elken Lindsgaard <a href="https://twitter.com/rlindsgaard">@rlindsgaard</a> 2014 - Donations accepted: <a href="https://flattr.com/submit/auto?user_id=rlindsgaard&url=https%3A%2F%2Frndphra.se" target="_blank"><img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a> BTC: 1NPnXF6bUBx9GJCnHkWNN5hpNQQAbWnpPP</p>
-		</footer>
-		<script src="js/bootstrap.min.js"></script>
-		<script data-main="js/main" src="js/require.js"></script>
-	</body>
+                    <label for="special-alphabet" class="col-md-1 control-label">Alphabet</label>
+                    <div class="col-md-4">
+                        <input type="text" id="special-alphabet" class="form-control input-small" data-bind="textInput: special_alphabet">
+                    </div>
+                </div>
+            </fieldset>
+            </form>
+        </div>
+        <footer>
+            <p>RndPhrase is released under the MIT license - &copy; Ronni Elken Lindsgaard <a href="https://twitter.com/rlindsgaard">@rlindsgaard</a> 2014 - Donations accepted: <a href="https://flattr.com/submit/auto?user_id=rlindsgaard&url=https%3A%2F%2Frndphra.se" target="_blank"><img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a> BTC: 1NPnXF6bUBx9GJCnHkWNN5hpNQQAbWnpPP</p>
+        </footer>
+        <script src="js/bootstrap.min.js"></script>
+        <script data-main="js/main" src="js/require.js"></script>
+    </body>
 </html>

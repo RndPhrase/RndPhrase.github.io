@@ -9,7 +9,7 @@ require(
         self.hash = ko.observable('');
         self.size = ko.observable(32);
         self.version = ko.observable(1);
-        self.use_legacy_mode = ko.observable(true)
+        self.use_legacy_mode = ko.observable(false)
 
         self.computeHash = function() {
             var domain = self.uri();

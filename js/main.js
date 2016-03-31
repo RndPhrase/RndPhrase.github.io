@@ -6,9 +6,48 @@ require(
         self.seed = ko.observable('');
         self.password = ko.observable('');
         self.uri = ko.observable('');
-        self.size = ko.observable(16);
+        self.hash = ko.observable('');
+        self.size = ko.observable(32);
         self.version = ko.observable(1);
         self.use_legacy_mode = ko.observable(true)
+
+        self.computeHash = function() {
+            var domain = self.uri();
+            if(self.use_legacy_mode()) {
+                d = new DomainManager();
+                if(!d.is_host(domain)) return '';
+                domain = d.get_host(domain);
+                var r = new Legacy({
+                    seed: self.seed(),
+                    password: self.password(),
+                    uri: domain,
+                    version: self.version()
+                });
+
+                self.hash(r.generate());
+            } else {
+                var r = new Improved({
+                    seed: self.seed(),
+                    uri: domain,
+                    numeric: self.numeric(),
+                    capital: self.capital(),
+                    minuscule: self.minuscule(),
+                    special: self.special(),
+                    size: self.size(),
+                    version: self.version()
+                })
+
+                r.generatePassword(self.password(), function(hash) {
+                    self.hash(hash);
+                })
+            }
+        }
+        self.seed.subscribe(self.computeHash);
+        self.password.subscribe(self.computeHash);
+        self.uri.subscribe(self.computeHash);
+        self.size.subscribe(self.computeHash);
+        self.version.subscribe(self.computeHash);
+        self.use_legacy_mode.subscribe(self.computeHash);
 
         self.use_numeric_defaults = ko.observable(true);
         self.numeric_min = ko.observable(1);
@@ -57,33 +96,6 @@ require(
                 alphabet: self.special_alphabet()
             };
         });
-
-        self.hash = ko.pureComputed(function() {
-            if(self.uri()) {
-                var domain = self.uri();
-                var psFunc = Improved;
-                if(self.use_legacy_mode()) {
-                    psFunc = Legacy;
-                    d = new DomainManager();
-                    if(!d.is_host(domain)) return '';
-                    domain = d.get_host(domain);
-                }
-                var r = new psFunc({
-                    seed: self.seed(),
-                    password: self.password(),
-                    uri: domain,
-                    numeric: self.numeric(),
-                    capital: self.capital(),
-                    minuscule: self.minuscule(),
-                    special: self.special(),
-                    size: self.size(),
-                    version: self.version()
-                });
-
-                return r.generate();
-            }
-            return '';
-        }, this);
     }
     var viewModel = new ViewModel()
     ko.applyBindings(viewModel);

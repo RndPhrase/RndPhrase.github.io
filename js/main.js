@@ -106,6 +106,11 @@ require(
 
     $(window).on('blur', function(e) {
         viewModel.password('');
-        $('#password').focus();
+        viewModel.hash('');
+        if(viewModel.seed() == '') {
+            $('#seed').focus();
+        } else {
+            $('#password').focus();
+        }
     });
 });
